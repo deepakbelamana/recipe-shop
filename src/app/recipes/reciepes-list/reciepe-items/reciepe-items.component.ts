@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { Recipe } from '../../recipe.mode';
 
 @Component({
   selector: 'app-reciepe-items',
@@ -6,5 +7,5 @@ import { Component } from '@angular/core';
   styleUrl: './reciepe-items.component.css'
 })
 export class ReciepeItemsComponent {
-
+  @Input() recipe : Recipe
 }

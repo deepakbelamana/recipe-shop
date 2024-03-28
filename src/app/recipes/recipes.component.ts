@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Recipe } from './recipe.mode';
 
 @Component({
   selector: 'app-recipes',
@@ -7,4 +8,9 @@ import { Component } from '@angular/core';
 })
 export class RecipesComponent {
 
+  recipeSelectedTosendForDetailComponent:Recipe
+
+  recieveRecipeFromList(recipe:Recipe) {
+      this.recipeSelectedTosendForDetailComponent = recipe
+  }
 }

@@ -11,6 +11,7 @@ import { ReciepeItemsComponent } from './recipes/reciepes-list/reciepe-items/rec
 import { ReciepesDetailComponent } from './recipes/reciepes-detail/reciepes-detail.component';
 import { ShoppingListComponent } from './shopping-list/shopping-list.component';
 import { ShoppingEditComponent } from './shopping-list/shopping-edit/shopping-edit.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { ShoppingEditComponent } from './shopping-list/shopping-edit/shopping-ed
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule
   ],
   providers: [
     provideClientHydration()

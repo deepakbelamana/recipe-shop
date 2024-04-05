@@ -19,5 +19,11 @@ export class ShoppingListService {
     this.ingredients.push(newIngredient);
     this.updatedIngredients.emit(this.getIngredients());
   }
+
   constructor() {}
+
+  addIngredientsFromRecipeDetailComponent(ingredients : Ingredient[]) {
+    this.ingredients.push(...ingredients)
+    this.updatedIngredients.emit(this.getIngredients());
+  }
 }

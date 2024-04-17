@@ -29,7 +29,7 @@ import { DropDownDirective } from './shared/directives/drop-down.directive';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
   ],
   providers: [
     provideClientHydration()

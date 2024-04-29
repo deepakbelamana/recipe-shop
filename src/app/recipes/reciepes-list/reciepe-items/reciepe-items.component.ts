@@ -16,7 +16,6 @@ export class ReciepeItemsComponent {
   constructor(private recipeService: RecipeService, private router : Router) {}
 
   onRecipeClick() {
-    // this.router.navigate(['/recipe','1'])
-    // this.recipeService.recipeSelectedForDetails.emit(this.recipe); 
+
   }
 }

@@ -16,7 +16,8 @@
       </div>
       <div class="row">
         <div class="col-xs-10" >
-          <button style="margin:0px 2px 0px 2px" class="btn btn-success" type="submit" [disabled]="!ingEditForm.valid">Add</button>
+          <button style="margin:0px 2px 0px 2px" class="btn btn-success" type="submit" 
+          [disabled]="!ingEditForm.valid">{{this.editMode ? 'update' : 'add'}}</button>
           <button style="margin:0px 2px 0px 2px" class="btn btn-danger" type="button">Delete</button>
           <button style="margin:0px 2px 0px 2px" class="btn btn-primary" type="button">Clear</button>
         </div>

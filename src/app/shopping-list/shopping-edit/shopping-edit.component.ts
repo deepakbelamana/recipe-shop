@@ -10,25 +10,36 @@ import { Subscription } from 'rxjs';
   styleUrl: './shopping-edit.component.css'
 })
 export class ShoppingEditComponent implements OnInit {
+  @ViewChild('ingEditForm') ingEditForm: NgForm
+  editIndexSubscription: Subscription
+  editIndex: number
+  editMode: boolean = false
+  editingIngredient: Ingredient
+  constructor(private shoppingListService: ShoppingListService) {
 
-editIndexSubscription : Subscription
-editIndex : number
-editMode : boolean = false
-constructor(private shoppingListService : ShoppingListService) {
-
-}
+  }
   ngOnInit(): void {
     this.editIndexSubscription = this.shoppingListService.startedEditing.subscribe(
-      (index : number) =>{
-        this.editIndex=index
-        this.editMode=false
+      (index: number) => {
+        this.editIndex = index
+        this.editMode = true
+        this.editingIngredient = this.shoppingListService.getIngredient(index)
+        this.ingEditForm.setValue({
+          name: this.editingIngredient.name,
+          amount: this.editingIngredient.amount
+        })
       }
     )
   }
-  onAddingIngridient(ingEditForm : NgForm) {
-      const ingEditFormValue = ingEditForm.value;
-      const newIngredient = new Ingredient(ingEditFormValue.name,ingEditFormValue.amount);
+  onAddingIngridient(ingEditForm: NgForm) {
+    const ingEditFormValue = ingEditForm.value;
+    const newIngredient = new Ingredient(ingEditFormValue.name, ingEditFormValue.amount);
+    if (this.editMode) {
+      this.shoppingListService.updateIngredients(this.editIndex, newIngredient)
+    } else {
       this.shoppingListService.addIngredient(newIngredient);
+    }
+
   }
 
 }

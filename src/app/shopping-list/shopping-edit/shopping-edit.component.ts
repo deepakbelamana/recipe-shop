@@ -31,15 +31,21 @@ export class ShoppingEditComponent implements OnInit {
       }
     )
   }
-  onAddingIngridient(ingEditForm: NgForm) {
-    const ingEditFormValue = ingEditForm.value;
+  onSubmit(Form: NgForm) {
+    const ingEditFormValue = Form.value;
     const newIngredient = new Ingredient(ingEditFormValue.name, ingEditFormValue.amount);
     if (this.editMode) {
       this.shoppingListService.updateIngredients(this.editIndex, newIngredient)
     } else {
       this.shoppingListService.addIngredient(newIngredient);
     }
+    this.editMode=false;
+    Form.resetForm();
+  }
 
+  onClear() {
+    this.ingEditForm.reset();
+    this.editMode=false;
   }
 
 }

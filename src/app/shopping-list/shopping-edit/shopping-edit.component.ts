@@ -48,4 +48,10 @@ export class ShoppingEditComponent implements OnInit {
     this.editMode=false;
   }
 
+  onDelete() {
+    this.shoppingListService.removeIngredient(this.editIndex)
+    this.onClear()
+
+  }
+
 }

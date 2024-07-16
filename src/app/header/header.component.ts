@@ -16,6 +16,6 @@ export class HeaderComponent {
     }
     
     fetchRecipesFromFb() {
-      this.dataStorageService.fetchRecipesFromFireBase();
+      this.dataStorageService.fetchRecipesFromFireBase().subscribe();
     }
 }

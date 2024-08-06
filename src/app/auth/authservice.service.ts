@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { catchError } from 'rxjs/operators';
+import { throwError } from 'rxjs';
 
 
 interface AuthResponse {
@@ -26,6 +28,24 @@ export class AuthserviceService {
       {email:email,
        password:password,
        returnSecureToken:true
-      });
+      }).pipe(
+        catchError(error => {
+          let errorMessage = "an error occurred while signing";
+          if(!error.error || !error.error.error){
+            return throwError(errorMessage);
+          }
+          else{
+            switch(error.error.error.message){
+              case 'EMAIL_EXISTS':
+                errorMessage = "Email already exists";
+                break;
+              default:
+                errorMessage = "An unexpected error occurred";
+            }
+            return throwError(errorMessage);
+          }
+        }
+        )
+      );
   }
 }

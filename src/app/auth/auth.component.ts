@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { AuthserviceService } from './authservice.service';
+import { AuthResponse, AuthserviceService } from './authservice.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-auth',
@@ -29,20 +30,28 @@ export class AuthComponent {
     if(!form.valid){
       return
     }
+    let authObservable = new Observable<AuthResponse>();
     if(this.isLoginMode){
-      //--------------------------------
+    authObservable= this.authService.loginUser(email,password)
     }else{
       this.isLoading=true;
-      this.authService.signUpUser(email,password).subscribe(response => {
+      authObservable=this.authService.signUpUser(email,password)
+    }
+
+    authObservable.subscribe(response => {
+      if(this.error){
+        this.error=null  // Reset the error message if any exists before new error occurs.
+        this.isLoading=false;  // Reset the loading state after error occurs.
+      }
       console.log(response);
       this.isLoading=false;
+
       },err=>{
         console.log(err);
         this.error=err
         this.isLoading=false;
       }
       )
-    }
     form.reset();  // Reset the form after submission
   }
 }

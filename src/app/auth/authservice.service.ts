@@ -24,7 +24,7 @@ export class AuthserviceService {
 
   constructor(private http:HttpClient) { }
 
-  user = new Subject<User>();
+   userHandle = new Subject<User>();
 
   signUpUser(email:string, password:string) {
     return this.http.post<AuthResponse>(
@@ -40,7 +40,7 @@ export class AuthserviceService {
   private handleuser(response: AuthResponse){
     const expirationDate = new Date().getTime()+ +response.expiresIn;
     const user = new User(response.email,response.localId,response.idToken, new Date(expirationDate));
-    this.user.next(user)
+    this.userHandle.next(user)
   }
   loginUser(email:string, password:string){
     return this.http.post<AuthResponse>(
